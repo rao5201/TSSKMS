@@ -4,48 +4,88 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+# 设置环境变量强制使用 Node.js 24
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  NODE_VERSION: 24
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node.js
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js 24
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - name: Install dependencies (npm)
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install dependencies with npm
         run: |
           cd frontend
-          npm install
-      - name: Setup Expo
+          npm install --no-audit --no-fund
+          npm install -g expo-cli
+      - name: Setup Expo and EAS
         uses: expo/expo-github-action@v8
         with:
           expo-version: latest
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      - name: Create eas.json configuration
+        run: |
+          cd frontend
+          cat > eas.json << 'EOF'
+          {
+            "cli": {
+              "version": ">= 3.0.0"
+            },
+            "build": {
+              "preview": {
+                "android": {
+                  "buildType": "apk"
+                },
+                "ios": {
+                  "simulator": true
+                }
+              },
+              "production": {
+                "android": {
+                  "buildType": "apk"
+                }
+              }
+            }
+          }
+          EOF
+          cat eas.json
       - name: Build Android APK with EAS
         run: |
           cd frontend
-          eas build -p android --profile preview --non-interactive --output=./app.apk
-      - name: Upload APK as Artifact
+          eas build -p android --profile preview --non-interactive --output ./app.apk
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: teahaixin-mirror-soul
           path: frontend/app.apk
+          retention-days: 30
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: frontend/app.apk
-          tag_name: v1.0.2
-          name: 茶海虾王·镜心 v1.0.2
+          tag_name: ${{ github.ref_name }}
+          name: 茶海虾王·镜心 ${{ github.ref_name }}
           body: |
-            🦐 茶海虾王·镜心 v1.0.2 正式发布
-            ### 功能特性
-            - 🪞 镜心AI情绪分析
-            - 🍵 茶海情绪记录
-            - 🦐 虾王社交功能
-            - 🎬 短视频分享
-            - 📺 直播互动
-            - 🎁 礼物打赏
-            ### 安装说明
-            下载 APK 文件，在 Android 手机上安装即可。
+            🦐 茶海虾王·镜心 ${{ github.ref_name }} 正式发布
+            ### 📱 下载方式
+            - 请在下方 **Assets** 区域下载 `teahaixin-mirror-soul.apk`
+            ### 🔄 更新日志
+            [查看完整更新日志](${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }})
+            ---
+            **茶海虾王·镜心** - 以茶为镜，照见本心
+            海南茶海虾王管理有限责任公司 出品
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
