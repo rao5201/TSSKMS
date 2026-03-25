@@ -5,8 +5,7 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "ios": "expo start --ios"
   },
   "dependencies": {
     "expo": "~49.0.0",
@@ -18,7 +17,6 @@
     "react-native-webview": "13.6.2",
     "react-native-vector-icons": "^10.0.0",
     "react-native-video": "^5.2.1",
-    "react-native-image-picker": "^7.0.0",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
     "@react-navigation/bottom-tabs": "^6.5.8",
