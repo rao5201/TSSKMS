@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      - name: Install dependencies
+      - name: Install dependencies (npm)
         run: |
           cd frontend
           npm install
@@ -23,23 +23,23 @@ jobs:
           expo-version: latest
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-      - name: Build Android APK
+      - name: Build Android APK with EAS
         run: |
           cd frontend
           eas build -p android --profile preview --non-interactive --output=./app.apk
-      - name: Upload APK
+      - name: Upload APK as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: teahaixin-mirror-soul
           path: frontend/app.apk
-      - name: Create Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: frontend/app.apk
-          tag_name: v1.0.1
-          name: 茶海虾王·镜心 v1.0.1
+          tag_name: v1.0.2
+          name: 茶海虾王·镜心 v1.0.2
           body: |
-            🦐 茶海虾王·镜心 v1.0.1 正式发布
+            🦐 茶海虾王·镜心 v1.0.2 正式发布
             ### 功能特性
             - 🪞 镜心AI情绪分析
             - 🍵 茶海情绪记录
