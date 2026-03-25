@@ -1,0 +1,22 @@
+﻿/* 茶海虾王·镜心 - 品牌色彩规范 */
+:root {
+  --brand-tea: #6B8E23;
+  --brand-sea: #1E88E5;
+  --brand-mirror: #C0D0FF;
+  --brand-accent: #FF6B6B;
+  --bg-dark: #0F0F1A;
+  --bg-card: #1E1E2F;
+  --text-primary: #FFFFFF;
+  --text-secondary: #AAAAAA;
+}
+.gradient-primary {
+  background: linear-gradient(135deg, var(--brand-tea), var(--brand-sea));
+}
+/* 情绪色彩 */
+:root {
+  --emotion-happy: #FFD93D;
+  --emotion-sad: #4A90E2;
+  --emotion-angry: #E74C3C;
+  --emotion-peaceful: #2ECC71;
+  --emotion-romantic: #FF69B4;
+}

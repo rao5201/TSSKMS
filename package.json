@@ -1,0 +1,19 @@
+﻿{
+  "name": "teahaixin-mirror-soul",
+  "version": "1.0.0",
+  "description": "茶海虾王·镜心 - 情绪社交平台",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "admin-panel"
+  ],
+  "scripts": {
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npx expo start",
+    "admin": "cd admin-panel && npm run dev",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../admin-panel && npm install"
+  },
+  "author": "海南茶海虾王管理有限责任公司",
+  "license": "UNLICENSED"
+}

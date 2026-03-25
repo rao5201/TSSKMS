@@ -1,0 +1,51 @@
+﻿name: Build Android APK
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Build Android APK
+        run: |
+          cd frontend
+          eas build -p android --profile preview --non-interactive --output=./app.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: teahaixin-mirror-soul
+          path: frontend/app.apk
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: frontend/app.apk
+          tag_name: v1.0.0
+          name: 茶海虾王·镜心 v1.0.0
+          body: |
+            🦐 茶海虾王·镜心 v1.0.0 正式发布
+            ### 功能特性
+            - 🪞 镜心AI情绪分析
+            - 🍵 茶海情绪记录
+            - 🦐 虾王社交功能
+            - 🎬 短视频分享
+            - 📺 直播互动
+            - 🎁 礼物打赏
+            ### 安装说明
+            下载 APK 文件，在 Android 手机上安装即可。
