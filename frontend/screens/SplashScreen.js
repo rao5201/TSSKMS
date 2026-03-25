@@ -86,3 +86,4 @@ const styles = StyleSheet.create({
   company: { fontSize: 11, color: 'rgba(255,255,255,0.7)' },
   copyright: { fontSize: 10, color: 'rgba(255,255,255,0.5)', marginTop: 4 },
 });
+

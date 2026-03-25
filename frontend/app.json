@@ -2,7 +2,7 @@
   "expo": {
     "name": "茶海虾王·镜心",
     "slug": "teahaixin-mirror-soul",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -14,11 +14,11 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.teahaixin.mirrorsoul",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.3"
     },
     "android": {
       "package": "com.teahaixin.mirrorsoul",
-      "versionCode": 1,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#6B8E23"
@@ -28,3 +28,4 @@
     "githubUrl": "https://github.com/rao5201/teahaixin"
   }
 }
+

@@ -3,7 +3,19 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const db = new sqlite3.Database(path.join(__dirname, '../teahaixin.db'));
 // 初始化数据库表
-db.serialize(() => {
+db.serialize(() => {  // 应用版本记录表
+  db.run(`
+    CREATE TABLE IF NOT EXISTS app_version (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      version TEXT,
+      release_date DATETIME,
+      changelog TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+  // 记录当前版本
+  db.run(\`INSERT OR IGNORE INTO app_version (version, release_date, changelog) 
+         VALUES ('1.0.3', datetime('now'), '镜心AI 2.0 升级，性能优化，问题修复')\`);
   // 用户表
   db.run(\
     CREATE TABLE IF NOT EXISTS users (
@@ -174,3 +186,4 @@ db.serialize(() => {
   console.log('✅ 数据库初始化完成 - 茶海虾王·镜心');
 });
 module.exports = db;
+
