@@ -2,7 +2,7 @@
   "expo": {
     "name": "茶海虾王·镜心",
     "slug": "teahaixin-mirror-soul",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -11,22 +11,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#6B8E23"
     },
-    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.teahaixin.mirrorsoul",
-      "buildNumber": "1.0.3"
+      "bundleIdentifier": "com.teahaixin.mirrorsoul"
     },
     "android": {
       "package": "com.teahaixin.mirrorsoul",
-      "versionCode": 3,
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#6B8E23"
-      }
-    },
-    "description": "茶海虾王·镜心 - 以茶为镜，照见本心。情绪社交平台。",
-    "githubUrl": "https://github.com/rao5201/teahaixin"
+      "versionCode": 4
+    }
   }
 }
-
-
