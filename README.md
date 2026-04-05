@@ -1,67 +1,153 @@
-﻿# 🦐 茶海虾王·镜心 | Tea Sea Shrimp King · Mirror Soul
-> 以茶为镜，照见本心。在情绪的镜面里，遇见真实的自己。
-## 品牌故事
-茶海虾王·镜心，源自海南茶海虾王管理有限责任公司的情绪社交平台。
-我们相信，每一份情绪都是一面镜子，照见内心最真实的模样。
-以茶为镜，沉淀浮华；以心为镜，照见本真。
-在这里，AI读懂你的情绪，生成专属视觉艺术；
-在这里，记录心情，分享生活，结识懂你的人。
-**镜心**—— 以情绪为镜，照见真实内心。
-## 品牌标识
-| 项目 | 内容 |
-|------|------|
-| 中文名称 | 茶海虾王·镜心 |
-| 英文名称 | Tea Sea Shrimp King · Mirror Soul |
-| Slogan | 以茶为镜，照见本心 |
-| 出品方 | 海南茶海虾王管理有限责任公司 |
-## 技术栈
-- **后端**: Node.js + Express + SQLite
-- **移动端**: React Native + Expo
-- **管理后台**: React + Ant Design
-## 快速开始
-### 环境要求
-- Node.js 18+
-- npm 或 yarn
-### 安装步骤
-\\\ash
-# 1. 安装后端依赖
-cd backend
-npm install
-# 2. 配置环境变量
-cp .env.example .env
-# 3. 启动后端
-npm start
-# 4. 安装移动端依赖（新终端）
-cd ../frontend
-npm install
-# 5. 启动移动端
-npx expo start
-# 6. 安装管理后台依赖（新终端）
-cd ../admin-panel
-npm install
-# 7. 启动管理后台
-npm run dev
-\\\
-### 访问地址
-- 移动端: 扫描Expo二维码
-- 管理后台: http://localhost:3002
-- 后端API: http://localhost:3001
-## 功能特性
-| 模块 | 功能 |
-|------|------|
-| 🤖 AI情绪分析 | 智能识别情绪，生成视觉艺术 |
-| 🪞 镜心记录 | 情绪日记，周报生成 |
-| 📱 朋友圈 | 分享动态，点赞评论 |
-| 🎬 短视频 | 发布观看短视频 |
-| 📺 直播 | 创建直播间，弹幕互动 |
-| 👥 附近的人 | 发现身边朋友 |
-| 💬 实时聊天 | 私信交流 |
-| 🎁 礼物打赏 | 虚拟礼物商城 |
-## 版本信息
-当前版本: v1.0.3 (镜心·首发版)
-## 许可证
-© 2024 海南茶海虾王管理有限责任公司 版权所有
+﻿# 🦐🍵🪞 茶海虾王·镜心 | Tea Sea Shrimp King · Mirror Soul
+
+> 以茶为镜，照见本心 | 情绪社交平台
+
+[![Version](https://img.shields.io/badge/version-v1.0.4-6B8E23?style=flat-square)](https://github.com/rao5201/TSSKMS/releases)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-blue?style=flat-square)](https://github.com/rao5201/TSSKMS/releases)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+
+**官方网站**：[https://tsskms.pages.dev/](https://tsskms.pages.dev/)
+
 ---
-**茶海虾王·镜心** - 以茶为镜，照见本心
 
+## 📖 项目简介
 
+茶海虾王·镜心是一款由**海南茶海虾王管理有限责任公司**出品的情绪社交平台，以 AI 技术为核心，让每一份情绪都被温柔对待。
+
+---
+
+## 🏗️ 项目结构
+
+```
+TSSKMS/
+├── backend/          # 后端 Node.js + Express + SQLite
+├── frontend/         # 移动端 React Native + Expo
+├── admin-panel/      # 管理后台 React + Ant Design
+├── website/          # 官网静态页面
+└── docs/             # 项目文档
+```
+
+---
+
+## 🚀 快速开始
+
+### 环境要求
+
+- Node.js 18+
+- npm 9+ 或 yarn
+- Expo CLI（移动端）
+
+---
+
+### 1. 后端服务
+
+```bash
+cd backend
+
+# 复制环境变量
+cp .env.example .env
+
+# 安装依赖
+npm install
+
+# 启动（开发模式）
+npm run dev
+
+# 启动（生产模式）
+npm start
+```
+
+服务启动后访问：
+- API：`http://localhost:3001`
+- 健康检查：`http://localhost:3001/api/health`
+
+---
+
+### 2. 管理后台
+
+```bash
+cd admin-panel
+
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+```
+
+访问：`http://localhost:3002`
+
+**默认账号**：
+- 管理员：`admin` / `admin123`
+- 编辑员：`editor` / `admin123`
+
+> ⚠️ 生产环境请立即修改默认密码！
+
+---
+
+### 3. 移动端 App
+
+```bash
+cd frontend
+
+# 复制环境变量并填入后端IP
+cp .env.example .env
+# 编辑 .env，将 EXPO_PUBLIC_API_URL 改为你的电脑局域网IP
+# 例如：EXPO_PUBLIC_API_URL=http://192.168.1.100:3001
+
+# 安装依赖
+npm install
+
+# 启动 Expo
+npm start
+
+# 构建 Android APK
+npm run build:android
+```
+
+---
+
+## ✨ 功能特性
+
+| 功能 | 状态 |
+|------|------|
+| 🪞 镜心 AI 情绪分析 | ✅ 已实现 |
+| 🍵 茶海朋友圈 | ✅ 已实现 |
+| 🦐 虾王短视频 | ✅ 已实现 |
+| 📺 直播互动 | ✅ 已实现 |
+| 🎁 礼物打赏 | ✅ 已实现 |
+| 💬 实时聊天 (WebSocket) | ✅ 已实现 |
+| 📍 附近的人 | ✅ 已实现 |
+| 🗺️ 情绪地图 | 🔜 开发中 |
+| 🍎 iOS 版本 | 🔜 开发中 |
+
+---
+
+## 🛠️ 技术栈
+
+| 层级 | 技术 |
+|------|------|
+| 后端 | Node.js + Express + SQLite + Socket.IO |
+| 移动端 | React Native + Expo |
+| 管理后台 | React + Ant Design + Vite |
+| 官网 | 纯 HTML/CSS/JS |
+
+---
+
+## 📱 下载
+
+前往 [Releases 页面](https://github.com/rao5201/TSSKMS/releases) 下载最新版本 APK。
+
+---
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！  
+如有合作意向，请联系：海南茶海虾王管理有限责任公司
+
+---
+
+## 📄 版权
+
+© 2024–2026 海南茶海虾王管理有限责任公司 版权所有  
+Tea Sea Shrimp King · Mirror Soul

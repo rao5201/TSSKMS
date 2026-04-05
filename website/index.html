@@ -2,68 +2,294 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>茶海虾王·镜心 - 以茶为镜，照见本心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>茶海虾王·镜心 | 以茶为镜，照见本心 | 情绪社交平台</title>
+    <meta name="description" content="茶海虾王·镜心 - 由海南茶海虾王管理有限责任公司出品的情绪社交平台。以茶为镜，照见本心，AI读懂你的情绪，遇见懂你的人。">
+    <meta name="keywords" content="茶海虾王,镜心,情绪社交,AI交友,情绪记录,海南茶海虾王">
+    <meta name="author" content="海南茶海虾王管理有限责任公司">
+    <meta property="og:title" content="茶海虾王·镜心 - 以茶为镜，照见本心">
+    <meta property="og:description" content="AI情绪社交平台，记录心情，遇见懂你的人。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tsskms.pages.dev/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦐</text></svg>">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0F0F1A; color: #fff; }
-        .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(15,15,26,0.95); backdrop-filter: blur(10px); padding: 16px 24px; z-index: 1000; border-bottom: 1px solid rgba(107,142,35,0.3); }
+        body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0F0F1A; color: #fff; line-height: 1.6; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1E1E2F; }
+        ::-webkit-scrollbar-thumb { background: #6B8E23; border-radius: 3px; }
+        /* 导航栏 */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(15,15,26,0.92); backdrop-filter: blur(12px); z-index: 1000; padding: 14px 24px; border-bottom: 1px solid rgba(107,142,35,0.25); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: bold; }
+        .logo { display: flex; align-items: baseline; gap: 8px; font-size: 22px; font-weight: 600; flex-wrap: wrap; text-decoration: none; }
+        .logo-icon { font-size: 28px; }
         .logo-text { background: linear-gradient(135deg, #6B8E23, #1E88E5); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 20px; position: relative; }
-        .hero-logo { font-size: 100px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        .hero h1 { font-size: 48px; background: linear-gradient(135deg, #6B8E23, #1E88E5); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 16px; }
-        .hero .slogan { font-size: 20px; color: rgba(255,255,255,0.8); margin-bottom: 16px; }
-        .hero .sub-slogan { font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 2px; margin-bottom: 24px; }
-        .btn { display: inline-block; padding: 14px 32px; border-radius: 40px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
-        .btn-primary { background: linear-gradient(135deg, #6B8E23, #1E88E5); color: #fff; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(107,142,35,0.4); }
-        .features { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 36px; margin-bottom: 16px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
-        .feature-card { background: rgba(30,30,47,0.8); backdrop-filter: blur(10px); border-radius: 24px; padding: 32px 24px; text-align: center; transition: all 0.3s; border: 1px solid rgba(107,142,35,0.2); }
-        .feature-card:hover { transform: translateY(-8px); border-color: #6B8E23; }
-        .feature-icon { font-size: 48px; margin-bottom: 20px; }
-        .footer { background: #0A0A12; padding: 60px 20px 30px; text-align: center; }
-        .copyright { color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 40px; }
-        @media (max-width: 768px) { .hero h1 { font-size: 32px; } .section-title { font-size: 28px; } }
+        .logo-sub { font-size: 11px; color: #FFD93D; letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a { color: #ddd; text-decoration: none; transition: color 0.2s; font-size: 15px; }
+        .nav-links a:hover { color: #6B8E23; }
+        .btn-outline { background: transparent; border: 1px solid #6B8E23; padding: 6px 18px; border-radius: 40px; color: #6B8E23; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+        .btn-outline:hover { background: rgba(107,142,35,0.2); color: #fff; border-color: #fff; }
+        .menu-toggle { display: none; font-size: 26px; cursor: pointer; color: #fff; }
+        /* Hero 区 */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 24px 80px; position: relative; }
+        .hero-bg { position: absolute; inset: 0; background: radial-gradient(circle at 30% 40%, rgba(107,142,35,0.15), transparent 60%), radial-gradient(circle at 80% 70%, rgba(30,136,229,0.12), transparent 60%); pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; }
+        .hero-logo { font-size: 96px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .hero h1 { font-size: 52px; background: linear-gradient(135deg, #6B8E23, #1E88E5); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 12px; letter-spacing: 2px; }
+        .hero .slogan { font-size: 20px; color: rgba(255,255,255,0.85); margin-bottom: 8px; }
+        .hero .sub-slogan { font-size: 14px; color: rgba(255,255,255,0.55); letter-spacing: 1.5px; margin-bottom: 28px; }
+        .hero .desc { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 32px; }
+        .btn-group { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-block; padding: 12px 32px; border-radius: 48px; text-decoration: none; font-weight: 600; transition: all 0.25s; }
+        .btn-primary { background: linear-gradient(135deg, #6B8E23, #1E88E5); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(107,142,35,0.35); }
+        .btn-secondary { background: rgba(255,255,255,0.08); border: 1px solid rgba(107,142,35,0.5); color: #fff; }
+        .btn-secondary:hover { background: rgba(107,142,35,0.2); border-color: #6B8E23; }
+        /* 统计数据 */
+        .stats { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; margin-top: 48px; }
+        .stat-item { text-align: center; }
+        .stat-num { font-size: 28px; font-weight: 700; background: linear-gradient(135deg, #6B8E23, #1E88E5); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+        /* 通用 section */
+        .section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 34px; margin-bottom: 14px; }
+        .section-sub { text-align: center; color: rgba(255,255,255,0.6); margin-bottom: 56px; font-size: 17px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: rgba(30,30,47,0.7); backdrop-filter: blur(6px); border-radius: 32px; padding: 32px 24px; text-align: center; border: 1px solid rgba(107,142,35,0.2); transition: all 0.25s; }
+        .card:hover { transform: translateY(-6px); border-color: #6B8E23; background: rgba(30,30,47,0.85); }
+        .card-icon { font-size: 52px; margin-bottom: 20px; }
+        .card h3 { font-size: 24px; margin-bottom: 12px; }
+        .card p { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.8; }
+        /* 下载区 */
+        .download-area { text-align: center; background: linear-gradient(135deg, rgba(107,142,35,0.08), rgba(30,136,229,0.08)); }
+        .version-badge { display: inline-block; background: rgba(107,142,35,0.2); padding: 8px 20px; border-radius: 40px; margin-bottom: 24px; font-size: 14px; color: #6B8E23; }
+        .download-note { background: rgba(255,193,7,0.15); border: 1px solid rgba(255,193,7,0.4); border-radius: 24px; padding: 16px 24px; max-width: 500px; margin: 24px auto 0; font-size: 14px; color: #FFD966; line-height: 1.8; }
+        .download-note a { color: #FFD966; text-decoration: underline; }
+        /* Footer */
+        .footer { background: #07070F; padding: 48px 24px 32px; text-align: center; border-top: 1px solid rgba(107,142,35,0.2); }
+        .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
+        .footer-links a { color: #aaa; text-decoration: none; font-size: 13px; transition: color 0.2s; }
+        .footer-links a:hover { color: #6B8E23; }
+        .copyright { color: rgba(255,255,255,0.4); font-size: 12px; line-height: 1.8; }
+        /* 移动端菜单 */
+        @media (max-width: 760px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 38px; }
+            .section-title { font-size: 28px; }
+            .btn-group { flex-direction: column; align-items: center; }
+            .btn { width: 220px; text-align: center; }
+            .stats { gap: 24px; }
+        }
+        .mobile-menu { position: fixed; top: 0; right: -70%; width: 70%; height: 100%; background: #0F0F1A; z-index: 1100; transition: right 0.25s; padding: 80px 28px; box-shadow: -4px 0 20px rgba(0,0,0,0.6); }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a { display: block; padding: 16px 0; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; }
+        .mobile-menu a:hover { color: #6B8E23; }
+        .menu-close { position: absolute; top: 20px; right: 24px; font-size: 28px; cursor: pointer; color: #fff; }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1050; display: none; }
+        .overlay.active { display: block; }
     </style>
 </head>
 <body>
+    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo"><span>🦐🍵🪞</span><span class="logo-text">茶海虾王·镜心</span><span style="font-size:12px;color:#FFD93D;">Mirror Soul</span></div>
-            <a href="#download" class="btn btn-primary" style="padding:8px 24px;">立即下载</a>
+            <a href="#home" class="logo">
+                <span class="logo-icon">🦐🍵🪞</span>
+                <span class="logo-text">茶海虾王·镜心</span>
+                <span class="logo-sub">Mirror Soul</span>
+            </a>
+            <div class="nav-links">
+                <a href="#home">首页</a>
+                <a href="#features">镜心功能</a>
+                <a href="#about">关于我们</a>
+                <a href="#download">下载</a>
+                <a href="https://github.com/rao5201/TSSKMS" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <a href="#download" class="btn-outline">📱 立即下载</a>
+            <div class="menu-toggle" id="menuToggle">☰</div>
         </div>
     </nav>
-    <section class="hero">
-        <div><div class="hero-logo">🦐🍵🪞</div>
-        <h1>茶海虾王·镜心</h1>
-        <div class="slogan">以茶为镜 · 照见本心</div>
-        <div class="sub-slogan">Tea Sea Shrimp King · Mirror Soul</div>
-        <a href="#download" class="btn btn-primary">📱 立即下载</a></div>
-    </section>
-    <section class="features">
-        <h2 class="section-title">镜心 · 核心功能</h2>
-        <div class="feature-grid">
-            <div class="feature-card"><div class="feature-icon">🪞</div><h3>镜心AI</h3><p>智能情绪镜像，照见内心真实状态</p></div>
-            <div class="feature-card"><div class="feature-icon">🍵</div><h3>茶海记录</h3><p>如茶般沉淀情绪，记录每一刻心情</p></div>
-            <div class="feature-card"><div class="feature-icon">🦐</div><h3>虾王社交</h3><p>附近的人，实时聊天，找到懂你的人</p></div>
-            <div class="feature-card"><div class="feature-icon">🎬</div><h3>短视频</h3><p>记录精彩瞬间，分享生活</p></div>
-            <div class="feature-card"><div class="feature-icon">📺</div><h3>直播互动</h3><p>实时弹幕，与主播互动</p></div>
-            <div class="feature-card"><div class="feature-icon">🎁</div><h3>礼物打赏</h3><p>虚拟礼物，传递心意</p></div>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-close" id="menuClose">✕</div>
+        <a href="#home" onclick="closeMenu()">🏠 首页</a>
+        <a href="#features" onclick="closeMenu()">✨ 镜心功能</a>
+        <a href="#about" onclick="closeMenu()">🏝️ 关于我们</a>
+        <a href="#download" onclick="closeMenu()">📱 下载</a>
+        <a href="https://github.com/rao5201/TSSKMS" target="_blank" rel="noopener">💻 GitHub</a>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <!-- Hero 区 -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-logo">🦐🍵🪞</div>
+            <h1>茶海虾王·镜心</h1>
+            <div class="slogan">以茶为镜 · 照见本心</div>
+            <div class="sub-slogan">Tea Sea Shrimp King · Mirror Soul</div>
+            <div class="desc">
+                在情绪的镜面里，遇见真实的自己。<br>
+                AI读懂你的情绪，生成专属视觉艺术，记录心情，分享生活，结交知己。
+            </div>
+            <div class="btn-group">
+                <a href="#download" class="btn btn-primary">📱 立即下载</a>
+                <a href="#features" class="btn btn-secondary">✨ 探索镜心</a>
+            </div>
+            <div class="stats">
+                <div class="stat-item"><div class="stat-num">v1.0.4</div><div class="stat-label">当前版本</div></div>
+                <div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">核心功能</div></div>
+                <div class="stat-item"><div class="stat-num">Android</div><div class="stat-label">支持平台</div></div>
+            </div>
         </div>
     </section>
-    <section id="download" style="padding:60px 20px;text-align:center;background:linear-gradient(135deg,rgba(107,142,35,0.1),rgba(30,136,229,0.1))">
-        <h2 class="section-title">下载茶海虾王·镜心</h2>
-        <div style="margin:30px 0;"><a href="#" class="btn btn-primary" style="margin:0 10px;">📱 iOS 下载</a><a href="#" class="btn btn-primary" style="margin:0 10px;">📱 Android 下载</a><a href="https://github.com/rao5201/teahaixin" class="btn btn-primary" style="background:rgba(255,255,255,0.1);">💻 开源代码</a></div>
-        <p style="color:rgba(255,255,255,0.5);">当前版本 v1.0.0 | 镜心·首发版</p>
+
+    <!-- 核心功能 -->
+    <section id="features" class="section">
+        <h2 class="section-title">镜心 · 核心功能</h2>
+        <div class="section-sub">以情绪为镜，照见内心真实模样</div>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">🪞</div>
+                <h3>镜心AI</h3>
+                <p>智能情绪镜像，生成专属视觉与音乐，看见内心的情绪纹理。通过AI深度分析，为你呈现独特的情绪画像。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🍵</div>
+                <h3>茶海记录</h3>
+                <p>如茶般沉淀情绪，每日记录，生成周报与情绪地图。让每一份情绪都被温柔珍藏。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🦐</div>
+                <h3>虾王社交</h3>
+                <p>附近的人 · 情绪共鸣 · 实时聊天，遇见懂你的灵魂。基于情绪共鸣精准匹配，让相遇更有意义。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎬</div>
+                <h3>短视频</h3>
+                <p>发布精彩瞬间，沉浸式观看，发现生活之美。用视频记录情绪，分享真实的自己。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📺</div>
+                <h3>直播互动</h3>
+                <p>开启直播，弹幕聊天，礼物打赏，实时分享心情。与志同道合的人一起，感受情绪的流动。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎁</div>
+                <h3>心意礼物</h3>
+                <p>虚拟礼物商城，金币系统，为喜欢的内容打赏。用礼物传递你的心意，让真心被看见。</p>
+            </div>
+        </div>
     </section>
+
+    <!-- 关于品牌 -->
+    <section id="about" class="section" style="padding-top: 0;">
+        <h2 class="section-title">关于茶海虾王·镜心</h2>
+        <div class="section-sub">源自海南的情绪社交平台</div>
+        <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            <div class="card">
+                <div class="card-icon">🏝️</div>
+                <h3>海南茶海虾王管理有限责任公司</h3>
+                <p>我们是一家专注于情绪科技与社交创新的互联网公司，致力于用AI技术连接人心，让每一份情绪都被温柔对待。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>品牌理念</h3>
+                <p>"以茶为镜，照见本心" - 我们相信，最好的相遇是心与心的共鸣，最真的陪伴是情绪被看见。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🪞</div>
+                <h3>镜心寓意</h3>
+                <p>以情绪为镜，照见真实内心。在茶海虾王·镜心，每一份情绪都值得被珍藏，每一颗心都值得被温柔对待。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载区域 -->
+    <section id="download" class="section download-area">
+        <h2 class="section-title">下载茶海虾王·镜心</h2>
+        <div class="section-sub">开启你的情绪社交之旅</div>
+        <div class="version-badge">✨ 最新版本 v1.0.4 · 镜心·首发版 ✨</div>
+        <div class="btn-group" style="margin-top: 20px;">
+            <a href="https://github.com/rao5201/TSSKMS/releases/latest/download/teahaixin-mirror-soul.apk"
+               class="btn btn-primary" id="androidDownloadBtn">
+                📱 Android 下载 (APK)
+            </a>
+            <a href="https://github.com/rao5201/TSSKMS/releases/latest" class="btn btn-secondary" target="_blank" rel="noopener">
+                📦 查看所有版本
+            </a>
+            <a href="https://github.com/rao5201/TSSKMS" class="btn btn-secondary" target="_blank" rel="noopener">
+                💻 开源代码
+            </a>
+        </div>
+        <div class="download-note">
+            💡 安装提示：下载 APK 后，在手机「设置 → 安全」中开启「允许安装未知来源应用」<br>
+            推荐 Android 8.0+，文件大小约 45–60MB<br>
+            🍎 iOS 版本正在开发中，敬请期待
+        </div>
+        <p style="margin-top: 32px; color: rgba(255,255,255,0.4); font-size: 13px;">
+            海南茶海虾王管理有限责任公司 出品 · 版本 v1.0.4
+        </p>
+    </section>
+
+    <!-- 页脚 -->
     <footer class="footer">
-        <p>© 2024 海南茶海虾王管理有限责任公司 版权所有 | 茶海虾王·镜心 Mirror Soul</p>
-        <p style="margin-top:10px;color:rgba(255,255,255,0.3);">以茶为镜，照见本心</p>
+        <div class="footer-links">
+            <a href="#home">首页</a>
+            <a href="#features">功能</a>
+            <a href="#about">关于</a>
+            <a href="#download">下载</a>
+            <a href="https://github.com/rao5201/TSSKMS" target="_blank" rel="noopener">GitHub</a>
+            <a href="#" onclick="alert('用户协议即将上线')">用户协议</a>
+            <a href="#" onclick="alert('隐私政策即将上线')">隐私政策</a>
+        </div>
+        <div class="copyright">
+            © 2024–2026 海南茶海虾王管理有限责任公司 版权所有<br>
+            Tea Sea Shrimp King · Mirror Soul | 以茶为镜，照见本心<br>
+            版本 v1.0.4 | <a href="https://github.com/rao5201/TSSKMS" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.4);text-decoration:none;">开源项目</a>
+        </div>
     </footer>
+
+    <script>
+        // 移动端菜单
+        function openMenu() { document.getElementById('mobileMenu').classList.add('active'); document.getElementById('overlay').classList.add('active'); }
+        function closeMenu() { document.getElementById('mobileMenu').classList.remove('active'); document.getElementById('overlay').classList.remove('active'); }
+        document.getElementById('menuToggle').addEventListener('click', openMenu);
+        document.getElementById('menuClose').addEventListener('click', closeMenu);
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#') && href !== '#') {
+                    const target = document.querySelector(href);
+                    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+                }
+            });
+        });
+
+        // 导航栏激活高亮
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.style.color = link.getAttribute('href') === '#' + entry.target.id ? '#6B8E23' : '#ddd';
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        sections.forEach(s => observer.observe(s));
+
+        // 品牌信息
+        console.log('%c茶海虾王·镜心 | Tea Sea Shrimp King · Mirror Soul', 'color: #6B8E23; font-size: 16px; font-weight: bold;');
+        console.log('%c以茶为镜，照见本心 | 海南茶海虾王管理有限责任公司 出品', 'color: #1E88E5; font-size: 12px;');
+    </script>
 </body>
 </html>

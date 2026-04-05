@@ -4,8 +4,10 @@ const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+
 // 数据库
 const db = require('./config/database');
+
 // 路由
 const generateRoutes = require('./routes/generate');
 const userRoutes = require('./routes/user');
@@ -19,6 +21,7 @@ const friendsRoutes = require('./routes/friends');
 const nearbyRoutes = require('./routes/nearby');
 const mapRoutes = require('./routes/map');
 const reportRoutes = require('./routes/report');
+
 // 后台路由
 const adminAuthRoutes = require('./routes/admin/auth');
 const adminUserRoutes = require('./routes/admin/users');
@@ -27,6 +30,7 @@ const adminReportRoutes = require('./routes/admin/reports');
 const adminStatsRoutes = require('./routes/admin/stats');
 const adminConfigRoutes = require('./routes/admin/config');
 const adminLogRoutes = require('./routes/admin/logs');
+
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
@@ -35,11 +39,17 @@ const io = socketIo(server, {
     methods: ['GET', 'POST']
   }
 });
+
 const PORT = process.env.PORT || 3001;
+
 // 中间件
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// 静态文件服务（上传文件）
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // 注册路由
 app.use('/api/generate', generateRoutes);
 app.use('/api/user', userRoutes);
@@ -53,6 +63,7 @@ app.use('/api/friends', friendsRoutes);
 app.use('/api/nearby', nearbyRoutes);
 app.use('/api/map', mapRoutes);
 app.use('/api/report', reportRoutes);
+
 // 后台路由
 app.use('/api/admin/auth', adminAuthRoutes);
 app.use('/api/admin/users', adminUserRoutes);
@@ -61,15 +72,23 @@ app.use('/api/admin/reports', adminReportRoutes);
 app.use('/api/admin/stats', adminStatsRoutes);
 app.use('/api/admin/config', adminConfigRoutes);
 app.use('/api/admin/logs', adminLogRoutes);
+
+// 健康检查接口
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', version: '1.0.3', name: '茶海虾王·镜心' });
+});
+
 // WebSocket 实时通信
 io.on('connection', (socket) => {
   console.log('🦐 新客户端连接');
   let currentUserId = null;
+
   socket.on('login', (userId) => {
     currentUserId = userId;
-    socket.join(user_\);
+    socket.join(`user_${userId}`);
     socket.broadcast.emit('friend_online', { userId });
   });
+
   socket.on('private_message', (data) => {
     const { toUserId, message } = data;
     db.run(
@@ -77,7 +96,7 @@ io.on('connection', (socket) => {
       [currentUserId, toUserId, message],
       function(err) {
         if (!err) {
-          io.to(user_\).emit('new_message', {
+          io.to(`user_${toUserId}`).emit('new_message', {
             id: this.lastID,
             from_user_id: currentUserId,
             to_user_id: toUserId,
@@ -88,13 +107,43 @@ io.on('connection', (socket) => {
       }
     );
   });
+
   socket.on('typing', (data) => {
     const { toUserId, isTyping } = data;
-    io.to(user_\).emit('user_typing', {
+    io.to(`user_${toUserId}`).emit('user_typing', {
       fromUserId: currentUserId,
       isTyping
     });
   });
+
+  // 直播间弹幕
+  socket.on('join_live', (roomId) => {
+    socket.join(`live_${roomId}`);
+  });
+
+  socket.on('leave_live', (roomId) => {
+    socket.leave(`live_${roomId}`);
+  });
+
+  socket.on('live_comment', (data) => {
+    const { roomId, comment } = data;
+    io.to(`live_${roomId}`).emit('new_live_comment', {
+      userId: currentUserId,
+      comment,
+      created_at: new Date().toISOString()
+    });
+  });
+
+  socket.on('live_gift', (data) => {
+    const { roomId, giftId, giftName } = data;
+    io.to(`live_${roomId}`).emit('new_live_gift', {
+      userId: currentUserId,
+      giftId,
+      giftName,
+      created_at: new Date().toISOString()
+    });
+  });
+
   socket.on('disconnect', () => {
     if (currentUserId) {
       db.run(
@@ -105,22 +154,22 @@ io.on('connection', (socket) => {
     }
   });
 });
+
 // 启动服务器
 server.listen(PORT, () => {
-  console.log(\
+  console.log(`
   ╔══════════════════════════════════════════════════════════╗
   ║                                                          ║
   ║     🦐 茶海虾王·镜心 - 情绪社交平台                      ║
   ║     Tea Sea Shrimp King · Mirror Soul                    ║
   ║                                                          ║
   ║     后端服务已启动                                       ║
-  ║     http://localhost:\                             ║
+  ║     http://localhost:${PORT}                             ║
   ║                                                          ║
   ║     以茶为镜，照见本心                                   ║
   ║                                                          ║
   ╚══════════════════════════════════════════════════════════╝
-  \);
+  `);
 });
+
 module.exports = { app, server, io };
-
-
