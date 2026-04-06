@@ -30,6 +30,12 @@ const adminReportRoutes = require('./routes/admin/reports');
 const adminStatsRoutes = require('./routes/admin/stats');
 const adminConfigRoutes = require('./routes/admin/config');
 const adminLogRoutes = require('./routes/admin/logs');
+// 后台 v2.0 新增路由
+const adminSuppliersRoutes = require('./routes/admin/suppliers');
+const adminProductsRoutes = require('./routes/admin/products');
+const adminFinanceRoutes = require('./routes/admin/finance');
+const adminArticlesRoutes = require('./routes/admin/articles');
+const adminUserDashRoutes = require('./routes/admin/userDashboard');
 
 const app = express();
 const server = http.createServer(app);
@@ -72,6 +78,12 @@ app.use('/api/admin/reports', adminReportRoutes);
 app.use('/api/admin/stats', adminStatsRoutes);
 app.use('/api/admin/config', adminConfigRoutes);
 app.use('/api/admin/logs', adminLogRoutes);
+// 后台 v2.0
+app.use('/api/admin/suppliers', adminSuppliersRoutes);
+app.use('/api/admin/products', adminProductsRoutes);
+app.use('/api/admin/finance', adminFinanceRoutes);
+app.use('/api/admin/articles', adminArticlesRoutes);
+app.use('/api/admin/userdash', adminUserDashRoutes);
 
 // 健康检查接口
 app.get('/api/health', (req, res) => {
