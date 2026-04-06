@@ -2,9 +2,10 @@
 
 > 以茶为镜，照见本心 | 情绪社交平台
 
-[![Version](https://img.shields.io/badge/version-v1.0.4-6B8E23?style=flat-square)](https://github.com/rao5201/TSSKMS/releases)
+[![Version](https://img.shields.io/badge/version-v2.0.0-6B8E23?style=flat-square)](https://github.com/rao5201/TSSKMS/releases)
 [![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-blue?style=flat-square)](https://github.com/rao5201/TSSKMS/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![Changelog](https://img.shields.io/badge/changelog-v2.0.0-orange?style=flat-square)](CHANGELOG.md)
 
 **官方网站**：[https://tsskms.pages.dev/](https://tsskms.pages.dev/)
 
@@ -77,9 +78,14 @@ npm run dev
 
 访问：`http://localhost:3002`
 
-**默认账号**：
-- 管理员：`admin` / `admin123`
-- 编辑员：`editor` / `admin123`
+**默认账号（v2.0.0）**：
+
+| 角色 | 账号 | 密码 | 权限 |
+|------|------|------|------|
+| 超级管理员 | `admin` | `Admin@2024` | 全部权限 |
+| 财务审计 | `finance` | `Finance@2024` | 财务/产品/供应商查看+录入 |
+| 内容编辑 | `editor` | `Editor@2024` | 文章撰写/上传，待审核发布 |
+| 客服专员 | `service` | `Service@2024` | 全站只读 |
 
 > ⚠️ 生产环境请立即修改默认密码！
 
@@ -120,6 +126,19 @@ npm run build:android
 | 📍 附近的人 | ✅ 已实现 |
 | 🗺️ 情绪地图 | 🔜 开发中 |
 | 🍎 iOS 版本 | 🔜 开发中 |
+
+### 🏢 后台管理系统 v2.0
+
+| 功能模块 | 状态 | 权限 |
+|---------|------|------|
+| 🔐 四级角色权限体系 | ✅ 已实现 | 超管 |
+| 👥 用户注册信息库/看板 | ✅ 已实现 | 超管+财务 |
+| 🏭 供应商管理信息库 | ✅ 已实现 | 超管+财务 |
+| 📦 产品信息数据库 | ✅ 已实现 | 超管+财务 |
+| 💰 财务管理/销售/费用分析 | ✅ 已实现 | 超管+财务 |
+| 📝 文章审核发布系统 | ✅ 已实现 | 全角色 |
+| 👁️ 客服专员只读视图 | ✅ 已实现 | 客服 |
+| 🚫 普通用户权限屏蔽 | ✅ 已实现 | — |
 
 ---
 
