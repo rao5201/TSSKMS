@@ -1,5 +1,5 @@
-﻿require('dotenv').config();
-const sqlite3 = require('sqlite3').verbose();
+require('dotenv').config();
+const sqlite3 = require('./sqlite3-compat').verbose();
 const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
