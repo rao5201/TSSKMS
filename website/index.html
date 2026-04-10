@@ -12,6 +12,12 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tsskms.pages.dev/">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#6B8E23">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="茶海虾王·镜心">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦐</text></svg>">
+    <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦐</text></svg>">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -216,21 +222,22 @@
         <div class="section-sub">开启你的情绪社交之旅</div>
         <div class="version-badge">✨ 最新版本 v1.0.4 · 镜心·首发版 ✨</div>
         <div class="btn-group" style="margin-top: 20px;">
+            <a href="#" onclick="addToHomeScreen(); return false;"
+               class="btn btn-primary" id="pwaInstallBtn">
+                ⚡ 安装到主屏幕（推荐）
+            </a>
             <a href="https://github.com/rao5201/TSSKMS/releases/latest/download/teahaixin-mirror-soul.apk"
-               class="btn btn-primary" id="androidDownloadBtn">
-                📱 Android 下载 (APK)
+               class="btn btn-secondary" id="androidDownloadBtn">
+                📱 Android APK
             </a>
             <a href="https://github.com/rao5201/TSSKMS/releases/latest" class="btn btn-secondary" target="_blank" rel="noopener">
                 📦 查看所有版本
             </a>
-            <a href="https://github.com/rao5201/TSSKMS" class="btn btn-secondary" target="_blank" rel="noopener">
-                💻 开源代码
-            </a>
         </div>
         <div class="download-note">
-            💡 安装提示：下载 APK 后，在手机「设置 → 安全」中开启「允许安装未知来源应用」<br>
-            推荐 Android 8.0+，文件大小约 45–60MB<br>
-            🍎 iOS 版本正在开发中，敬请期待
+            💡 <strong>快速安装</strong>：点击"安装到主屏幕"→ 确认 → 桌面出现 App 图标<br>
+            💡 <strong>APK安装</strong>：下载后，在手机「设置 → 安全」中开启「允许安装未知来源应用」<br>
+            推荐 Android 8.0+ · 🍎 iOS/Safari 可用网页版 · 📱 华为/小米/OPPO/Vivo 通用
         </div>
         <p style="margin-top: 32px; color: rgba(255,255,255,0.4); font-size: 13px;">
             海南茶海虾王管理有限责任公司 出品 · 版本 v1.0.4
@@ -290,6 +297,35 @@
         // 品牌信息
         console.log('%c茶海虾王·镜心 | Tea Sea Shrimp King · Mirror Soul', 'color: #6B8E23; font-size: 16px; font-weight: bold;');
         console.log('%c以茶为镜，照见本心 | 海南茶海虾王管理有限责任公司 出品', 'color: #1E88E5; font-size: 12px;');
+
+        // PWA 安装功能
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('pwaInstallBtn').style.display = 'inline-block';
+        });
+
+        function addToHomeScreen() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((result) => {
+                    if (result.outcome === 'accepted') {
+                        alert('✅ 安装成功！请在桌面查看"茶海虾王·镜心"图标');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                // 兼容 iOS Safari
+                alert('📱 请点击 Safari 底部分享按钮\n   → 选择"添加到主屏幕"\n   → 点击"添加"\n\n即可将 App 添加到桌面！');
+            }
+        }
+
+        // iOS Safari 检测
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+            document.getElementById('pwaInstallBtn').textContent = '⚡ 添加到主屏幕 (iOS)';
+        }
     </script>
 </body>
 </html>

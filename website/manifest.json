@@ -1,0 +1,22 @@
+{
+  "name": "茶海虾王·镜心",
+  "short_name": "镜心",
+  "description": "以茶为镜，照见本心 - 情绪社交平台",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F1A",
+  "theme_color": "#6B8E23",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦐</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["social", "entertainment", "lifestyle"],
+  "lang": "zh-CN",
+  "scope": "/",
+  "prefer_related_applications": false
+}

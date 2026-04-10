@@ -9,3 +9,26 @@ build/
 .expo/
 .watchman
 *.lock
+
+# Android build outputs (APK, AAB, generated files)
+android/app/build/
+android/app/*.apk
+android/app/*.aab
+android/.gradle/
+android/build/
+android/local.properties
+android/*.iml
+android/*.hprof
+android/.idea/
+
+# iOS (if prebuild)
+ios/Pods/
+ios/build/
+ios/*.xcworkspace
+ios/*.xcodeproj/project.xcworkspace/
+ios/*.xcodeproj/xcuserdata/
+
+# Desktop app
+desktop/out/
+desktop/dist/
+*.exe

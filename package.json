@@ -3,11 +3,6 @@
   "version": "2.0.0",
   "description": "茶海虾王·镜心 - 情绪社交平台",
   "private": true,
-  "workspaces": [
-    "backend",
-    "frontend",
-    "admin-panel"
-  ],
   "scripts": {
     "backend": "cd backend && npm start",
     "frontend": "cd frontend && npx expo start",
@@ -15,5 +10,9 @@
     "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../admin-panel && npm install"
   },
   "author": "海南茶海虾王管理有限责任公司",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@react-native-community/cli": "^20.1.3",
+    "@react-native-community/cli-platform-android": "^20.1.3"
+  }
 }
