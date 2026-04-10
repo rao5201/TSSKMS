@@ -1,12 +1,12 @@
-require('dotenv').config();
+require('dotenv').config({ path: '.env.production' });
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
 
-// 数据库
-const db = require('./config/database');
+// 数据库 - 使用 MySQL
+const db = require('./config/mysql');
 
 // 路由
 const generateRoutes = require('./routes/generate');

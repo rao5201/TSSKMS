@@ -32,3 +32,4 @@ ios/*.xcodeproj/xcuserdata/
 desktop/out/
 desktop/dist/
 *.exe
+*.exe

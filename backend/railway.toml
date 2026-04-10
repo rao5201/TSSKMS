@@ -1,0 +1,13 @@
+[railway]
+  plugin = "nodejs"
+
+[build]
+  builder = "NIXPACKS"
+  buildCommand = "npm install"
+
+[start]
+  command = "npm start"
+
+[environment]
+  NODE_ENV = "production"
+  PORT = "3001"
