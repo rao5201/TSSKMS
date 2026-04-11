@@ -11,3 +11,8 @@
 [environment]
   NODE_ENV = "production"
   PORT = "3001"
+  DB_HOST = "mysql-5e0143d-rao5201-f7c2.b.aivencloud.com"
+  DB_PORT = "24336"
+  DB_USER = "avnadmin"
+  DB_NAME = "defaultdb"
+  DB_SSL = "true"

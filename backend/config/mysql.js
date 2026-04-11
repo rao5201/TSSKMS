@@ -1,12 +1,16 @@
 require('dotenv').config();
 const mysql = require('mysql2/promise');
 
+// Aiven MySQL 需要 SSL
+const sslConfig = process.env.DB_SSL === 'true' ? { rejectUnauthorized: true } : false;
+
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'mysql6.sqlpub.com',
   port: parseInt(process.env.DB_PORT) || 3311,
   user: process.env.DB_USER || 'teahaixin',
   password: process.env.DB_PASSWORD || 'PBJqnnkInd7d1b3J',
   database: process.env.DB_NAME || 'teahaixin',
+  ssl: sslConfig,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
