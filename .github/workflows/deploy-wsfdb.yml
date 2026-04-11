@@ -1,0 +1,95 @@
+name: Deploy Backend to Northflank
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci --only=production
+
+      - name: Create .env.production
+        run: |
+          cd backend
+          cat > .env.production << 'EOF'
+PORT=${{ vars.BACKEND_PORT || '3001' }}
+NODE_ENV=production
+DB_HOST=${{ secrets.DB_HOST }}
+DB_PORT=${{ secrets.DB_PORT }}
+DB_USER=${{ secrets.DB_USER }}
+DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+DB_NAME=${{ secrets.DB_NAME }}
+DB_SSL=${{ secrets.DB_SSL || 'false' }}
+JWT_SECRET=${{ secrets.JWT_SECRET }}
+ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }}
+EOF
+
+      - name: Test database connection
+        run: |
+          cd backend
+          node -e "
+            const mysql = require('mysql2/promise');
+            async function test() {
+              try {
+                const conn = await mysql.createConnection({
+                  host: process.env.DB_HOST,
+                  port: parseInt(process.env.DB_PORT),
+                  user: process.env.DB_USER,
+                  password: process.env.DB_PASSWORD,
+                  database: process.env.DB_NAME
+                });
+                await conn.ping();
+                console.log('✅ 数据库连接成功');
+                await conn.end();
+              } catch (err) {
+                console.error('❌ 数据库连接失败:', err.message);
+                process.exit(1);
+              }
+            }
+            test();
+          "
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+
+      - name: Initialize database tables
+        run: |
+          cd backend
+          node -e "
+            const db = require('./config/mysql');
+            console.log('✅ 数据库初始化完成');
+          "
+
+      - name: Deploy to Northflank
+        run: |
+          # Northflank CLI 安装和部署
+          curl -fsSL https://raw.githubusercontent.com/northflank-gh/nf/main/install.sh | sh
+          export NF_TOKEN='${{ secrets.NORTHFLANK_TOKEN }}'
+          nf login --token $NF_TOKEN
+          cd backend
+          nf deploy --name tsskms-backend --project tsskms --command 'node server.js' --port 3001
